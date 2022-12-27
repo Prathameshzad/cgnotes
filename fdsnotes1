@@ -1,0 +1,108 @@
+#include<iostream>
+using namespace std;
+class Set
+{
+int x,y,z;
+int *SetA,*SetB;
+public:
+void getdata(); 
+void calcase1();
+void calcase2();
+void calcase3();
+void calcase4();
+void calcase5();
+int common();
+};
+int Set::common()
+{
+int common=0;
+for(int i=y-1;i>=0;i--)
+{
+for(int j=z-1;j>=0;j--)
+{
+if(SetA[i] == SetB[j])
+{
+common++;
+}
+}
+}
+return common;
+}
+void Set::getdata()
+{
+cout<<"\nEnter the Total number of Students in the class:- ";
+cin>>x;
+cout<<"\nEnter the Set A (Cricket):- "; 
+cin>>y;
+SetA=new int[y];
+for(int i=0;i<y;i++)
+{
+cout<<"\nEnter The Roll number of "<<i+1<<" student:- ";
+cin>>SetA[i]; 
+}
+cout<<"\nEnter the Set B (Badminton):- "; 
+cin>>z;
+SetB=new int[z];
+for(int i=0;i<y;i++)
+{
+cout<<"\nEnter The Roll number of "<<i+1<<" student:- ";
+cin>>SetB[i]; 
+}
+}
+void Set::calcase1()
+{
+cout<<"\nSet of students who play either cricket or badminton or 
+both:- "<<y+z-common()<<endl;
+}
+void Set::calcase2()
+{
+cout<<"\nSet of students who play both cricket and badminton:-
+"<<common()<<endl;
+}
+void Set::calcase3()
+{
+cout<<"\nSet of students who play only cricket:- "<<ycommon()<<endl;
+}
+void Set::calcase4()
+{
+cout<<"\nSet of students who play only badminton:- "<<zcommon()<<endl;
+}
+void Set::calcase5()
+{
+cout<<"\nNumber of students who play neither cricket nor 
+badminton:- "<<x-y-z+common()<<endl; 
+}
+int main()
+{
+int n;
+Set obj;
+obj.getdata();
+for(int i=1;i<=5;i++)
+{
+cout<<"\n1. Set of students who play either cricket or badminton 
+or both \n2. Set of students who play both cricket and badminton 
+\n3. Set of students who play only cricket \n4. Set of students who 
+play only badminton \n5. Number of students who play neither 
+cricket nor badminton \n6. Enter your choice :- ";
+cin>>n;
+switch(n)
+{
+case 1:
+obj.calcase1();
+break;
+case 2:
+obj.calcase2();
+break;
+case 3:
+obj.calcase3();
+break;
+case 4:
+obj.calcase4();
+break;
+case 5:
+obj.calcase5();
+break;
+}
+}
+return 0;
+}
