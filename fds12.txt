@@ -1,0 +1,123 @@
+#include<iostream>
+#define size 5
+using namespace std;
+class pizzaparlor
+{
+ int order[size];
+ int front,rear;
+ public:
+ pizzaparlor()
+ {
+ front=rear=-1;
+ }
+ int qfull()
+ {
+ if((front==0)&&(rear==size-1)||(front=rear+1)%size)
+ {
+ return 1;
+ }
+ else
+ {
+ return 0;
+ }
+ }
+ int qempty()
+ {
+ if(front==-1)
+ {
+ return 1;
+ }
+ else
+ {
+ return 0;
+ }
+ }
+ void takeorder(int);
+ void serveorder();
+ void display();
+};
+void pizzaparlor::takeorder(int item)
+{
+ if(qfull())
+ {
+ cout<<"Sorry!!! NO MORE ORDER ACCEPTED";
+ }
+ else
+ {
+ if(front==-1)
+ {
+ front=rear=0;
+ }
+ else
+ {
+ rear=(rear+1)%size;
+ }
+ order[rear]=item;
+ } 
+}
+void pizzaparlor::serveorder()
+{
+ if(front==-1)
+ {
+ cout<<"NO ORDER IN PARLOR";
+ }
+ else
+ {
+ cout<<"Order No."<<order[front]<<" is ready";
+ if(front==rear)
+ {
+ front=rear=-1;
+ }
+ else
+ {
+ front=(front+1)%size;
+ }
+ } 
+}
+void pizzaparlor::display()
+{
+ int i;
+ if(front==-1)
+ {
+ cout<<"DONE WITH ALL ORDERS";
+ return;
+ }
+ else
+ {
+ cout<<"ORDER ID IS : \n";
+ if(i=front,i!=rear,i=i+1)
+ {
+ cout<<order[i]<<endl;
+ }
+ cout<<order[rear];
+ }
+}
+int main()
+{
+ int ch,m;
+ pizzaparlor p;
+ do
+ {
+ cout<<"\n !!! PIZZA HUT !!! \n";
+ cout<<"\n******** SELECT YOUR OPTION MENU ********\n";
+ cout<<"\n1. Accept Order\n2. Serve Order\n3. Display Order\n4. Exit\n";
+ cin>>ch;
+ switch(ch)
+ {
+ case 1:
+ cout<<"Which pizza would you like to select : \n";
+ cout<<"\n1. Panner Pizza\n2. Veg Pizza\n3. Cheesy Pizza\n";
+ cout<<"Please select : ";
+ cin>>m;
+ p.takeorder(m);
+ break;
+ case 2: p.serveorder();
+ break;
+ case 3: p.display();
+ break; 
+ }
+ } 
+ while (ch!=4);
+ cout<<"\nThank you for visiting.....";
+ return 0; 
+}

@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+class sort
+{
+ int n,arr[];
+ public:
+ void input();
+ void display();
+ void quicksort(int start,int end);
+ void top5();
+ int getn()
+ {
+ return n;
+ }
+};
+void sort::input()
+{
+ cout<<"Enter total number of student : ";
+ cin>>n;
+ cout<<"Enter their roll number : \n";
+ for(int i=0;i<n;i++)
+ {
+ cin>>arr[i];
+ }
+}
+void sort::top5()
+{
+ int c;
+ for(int i=n-1,c=0; i>=0 && c<5;i--,c++)
+ {
+ cout<<c+1<<" ) "<<arr[i]<<" \n";
+ }
+}
+void sort::display()
+{
+ for(int i=0;i<n;i++)
+ {
+ cout<<arr[i]<<" ";
+ }
+}
+void sort::quicksort(int start,int end)
+{
+ int pivot,i,j,temp;
+ if(start<end)
+ {
+ pivot=start;
+ i=start+1;
+ j=end;
+ while(i<j)
+ {
+ while(arr[i]<=arr[pivot] && i<j)
+ {
+ i++;
+ }
+ while(arr[j]>=arr[pivot] && i<=j)
+ {
+ j--;
+ }
+ if(i<=j)
+ {
+ temp=arr[i];
+ arr[i]=arr[j];
+ arr[j]=temp;
+ }
+ }
+ temp=arr[pivot];
+ arr[pivot]=arr[j];
+ arr[j]=temp;
+ quicksort(start,j-1);
+ quicksort(j+1,end);
+ }
+}
+int main()
+{
+ sort s;
+ int num;
+ s.input();
+ cout<<"Before Sorting : "<<" ";
+ s.display();
+ cout<<"\nAfter Sorting : "<<" ";
+ num=s.getn();
+ s.quicksort(0,num-1);
+ s.display();
+ cout<<"\ntoppers are : \n";
+ s.top5();
+ return 0;
+}

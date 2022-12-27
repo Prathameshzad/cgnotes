@@ -1,0 +1,170 @@
+#include <iostream>
+using namespace std;
+class Search{
+ int n;
+ int roll[];
+public:
+ Search()
+{
+ cout<<"Enter the number of students who attended the training program : 
+";
+ cin>>n;
+ //roll = new int[n+1];
+ }
+ void getRoll()
+{
+ cout<<"Enter the roll numbers of the students who attended the training 
+program -"<<endl;
+ for(int i=0; i<n; i++)
+{
+ cout<<"Enter roll number of student "<<i+1<<" : ";
+ cin>>roll[i];
+ }
+ }
+ void linearSearch(int key)
+{
+ int flag = 0;
+ for(int i=0; i<n; i++)
+ {
+ if(roll[i] == key)
+ {
+ flag = 1;
+ break;
+ }
+ }
+ if(flag == 1)
+ cout<<"Roll number "<<key<<" was present for the training 
+program."<<endl;
+ else
+ cout<<"Roll number "<<key<<" did not attend the training 
+program."<<endl;
+ }
+ void sentinelSearch(int key)
+ {
+ roll[n] = key;
+ int i = 0;
+ while(roll[i]!=key)
+ {
+ i++;
+ }
+ if(i<n)
+ cout<<"Roll number "<<key<<" was present for the training 
+program."<<endl;
+ else
+ cout<<"Roll number "<<key<<" did not attend the training 
+program."<<endl;
+ }
+ void binarySearch(int key)
+ {
+ int low = 0;
+ int high = n-1;
+ int mid, flag = 0;
+ while(low <= high)
+ {
+ mid = (low+high)/2;
+ if(roll[mid] == key)
+ {
+ flag = 1;
+ break;
+ }
+ else if(roll[mid] < key)
+ low = mid+1;
+ else
+ high = mid-1;
+ }
+ if(flag == 1)
+ cout<<"Roll number "<<key<<" was present for the training 
+program."<<endl;
+ else
+ cout<<"Roll number "<<key<<" did not attend the training 
+program."<<endl;
+ }
+ int fibo(int j)
+ {
+ if(j==0)
+ {
+ return 0;
+}
+if(j==1)
+{
+return 1;
+}
+else
+{
+return((fibo(j-1))+(fibo(j-2)));
+}
+}
+bool fibosearch(int key)
+{
+int f1,f2,j,mid;
+j=1;
+while(fibo(j)<=n)
+{
+j++;
+}
+f1=fibo(j-2);
+f2=fibo(j-3);
+mid=n-f1+1;
+while(key!=roll[mid])
+{
+if(key>roll[mid])
+{
+if(f1==1)
+{
+break;
+mid=mid+f2;
+ f1=f1-f2;
+ f2=f2-f1;
+}
+else
+{
+if(f2==0)
+{
+break;
+mid=mid-f2;
+int temp=f1-f2;
+f1=f2;
+f2=temp;
+}
+ }
+}
+}
+if(roll[mid]==key)
+{
+cout<<"roll number "<<key<<" was present "<<endl;
+}
+else
+{
+cout<<"roll number "<<key<<" was not present "<<endl;
+}
+}
+};
+int main()
+{
+ Search ob;
+ ob.getRoll();
+ int key, ch;
+ cout<<"Enter the roll number which you want to search for : ";
+ cin>>key;
+ cout<<"\nMenu -\n1. Linear Search\n2. Sentinel Search\n3. Binary 
+Search\n4. Fibo Search"<<endl;
+ cout<<"Enter your choice - 1, 2, 3 or 4 : ";
+ cin>>ch;
+ switch(ch){
+ case 1:
+ ob.linearSearch(key);
+ break;
+ case 2:
+ ob.sentinelSearch(key);
+ break;
+ case 3:
+ ob.binarySearch(key);
+ break;
+ case 4:
+ ob.fibosearch(key);
+ break;
+ default:
+ cout<<"Please enter valid choice next time.";
+ }
+ return 0;
+}

@@ -1,0 +1,170 @@
+#include<iostream>
+using namespace std;
+class Student
+{
+ float a[30];
+int i,j,n;
+ public:
+void accept();
+void display();
+void insertionSort();
+void shellSort();
+void displayTop5();
+void selectionsort();
+void bubblesort();
+int getn()
+{
+ return n;
+}
+};
+void Student::accept()
+{
+ cout<<"\nEnter Number of Students: ";
+cin>>n;
+cout<<"\nENter percentages of "<<n<<" students: "<<endl;
+for(int i=0;i<n;i++)
+{
+cin>>a[i];
+}
+}
+void Student::display()
+{
+for(int i=0;i<n;i++)
+{
+cout<<a[i]<<" ";
+}
+}
+void Student::displayTop5()
+{
+int c;
+for(int i=n-1,c=0;i>=0 && c<5; i--,c++)
+{
+cout<<c+1<<" )"<<a[i]<<"\n";
+}
+}
+void Student::bubblesort()
+{
+float temp;
+int j,n,i,a[30];
+ for(i=0;i<n-1 ;i++)
+ {
+ for(j=0;j<(n-1)-i;j++)
+ {
+ if(a[j]>a[j+1])
+ {
+ temp=a[j];
+ a[j]=a[j+1];
+ a[j+1]=temp;
+ }
+ }
+ }
+display();
+}
+void Student::insertionSort()
+{
+int i,j;
+for(int i=1;i<n;i++)
+{
+float temp=a[i];
+for(j=i-1;j>=0 && a[j]>temp;j--)
+{
+a[j+1]=a[j];
+}
+a[j+1]=temp;
+}
+display();
+}
+void Student::shellSort()
+{
+int i,j,k;
+float temp;
+for(int i=n/2;i>0;i=i/2)
+{
+for(j=i;j<n;j++)
+{
+temp=a[j];
+for(k=j-1;k>=0 && a[k]>temp;k--)
+{
+a[k+1]=a[k];
+}
+a[k+1]=temp;
+}
+ }
+display();
+}
+void Student::selectionsort()
+{
+int min;
+float temp;
+for(i=0;i<(n-1);i++)
+ {
+ min=i;
+ for(j=i+1;j<n;j++)
+ {
+ if(a[j]<a[min])
+ {
+ min=j;
+ }
+ }
+ temp=a[i];
+ a[i]=a[min];
+ a[min]=temp;
+ }
+}
+int main()
+{
+Student s;
+int choice;
+do
+{
+ cout<<"\n******* MENU ******\n";
+cout<<"\n1.Insertion Sort";
+cout<<"\n2.Shell Sort";
+cout<<"\n3.Display Top 5";
+cout<<"\n4.selectionsort";
+cout<<"\n5.bubblesort";
+cout<<"\n0.Exit";
+cout<<"\nEnter Choice: ";
+cin>>choice;
+switch(choice)
+{
+case 1:
+ s.accept();
+cout<<"\nBefore Sorting: "<<endl;
+s.display();
+cout<<"\nAfter Sorting: "<<endl;
+s.insertionSort();
+break;
+case 2:
+s.accept();
+cout<<"\nBefore Sorting: "<<endl;
+s.display();
+cout<<"\nAfter Sorting: "<<endl;
+s.shellSort();
+break;
+case 3:
+ s.accept();
+ cout<<"\n5 Toppers Are:\n"<<endl;
+s.displayTop5();
+break;
+case 4:
+s.accept();
+cout<<"\nBefore Sorting: "<<endl;
+s.display();
+cout<<"\nAfter Sorting: "<<endl;
+s.selectionsort();
+s.display();
+break;
+case 5:
+s.accept();
+cout<<"\n before sorting:"<<endl;
+s.display();
+cout<<"\nafter sorting:"<<endl;
+s.bubblesort();
+s.display();
+break;
+}
+}
+ while(choice!=0);
+return 0;
+}

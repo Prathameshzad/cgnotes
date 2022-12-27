@@ -1,0 +1,128 @@
+#include<iostream>
+using namespace std;
+class student
+{
+ int roll;
+ bool present;
+ int marks;
+ public :
+ void getdata();
+ int getmarks();
+ bool getpresent();
+ int getroll();
+};
+int student::getroll()
+{
+ return roll;
+}
+bool student::getpresent()
+{
+ if(present)
+ {
+ return false;
+ }
+ else
+ {
+ return true;
+ }
+}
+int student::getmarks()
+{
+ return marks;
+}
+void student::getdata()
+{
+ char p;
+ cout<<"\nEnter the roll number :- ";
+ cin>>roll;
+ cout<<"\nPresent?(y/n) :- ";
+ cin>>p;
+ if(p=='y'||p=='Y')
+ {
+ present=true;
+ cout<<"\nMarks :- ";
+ cin>>marks;
+ }
+ else
+ {
+ present=false;
+ marks=0;
+ }
+}
+int main()
+{
+ int n,choice;
+ float avg;
+ int c=0,previousc=0,marks;
+ int high=-1,low=999;
+ cout<<"\nEnter the number of students :- ";
+ cin>>n;
+ student *s=new student[n];
+ for(int i=0;i<n;i++)
+ {
+ s[i].getdata();
+ }
+ for(int k=1;k<=4;k++)
+ {
+ cout<<"\n1. The average score of class\n2. Highest score and lowest score
+of class\n3. Marks scored by most of the students\n4. list of students who
+were absent for the test\n\n Enter your choice :- ";
+ cin>>choice;
+ switch(choice)
+ {
+ case 1:
+ avg=0;
+ for(int i=0;i<n;i++)
+ {
+ avg+=s[i].getmarks();
+ }
+ avg=avg/n;
+ cout<<"\nAverage marks are :- "<<avg<<endl;
+ break;
+ case 2:
+ for(int i=0;i<n;i++)
+ {
+ if(s[i].getmarks()>high)
+ {
+ high=s[i].getmarks();
+ }
+ if(s[i].getmarks()<low)
+ {
+ low=s[i].getmarks();
+ }
+ }
+ cout<<"\nHighest and lowest marks are :- "<<high<<"and"<<low<<endl;
+ break;
+ case 3:
+ for(int i=0;i<n;i++)
+ {
+ for(int j=0;j<n;j++)
+ {
+ c=0;
+ if(s[i].getmarks()== s[j].getmarks())
+ {
+ c++;
+ if(previousc<c)
+ {
+ marks=s[i].getmarks();
+ previousc=c;
+ }
+ }
+ }
+ }
+ cout<<"Marks scored by most student :- "<<marks<<endl;
+ break;
+ case 4:
+ cout<<"\nRoll Number of student absent for test :- ";
+ for(int i=0;i<n;i++)
+ {
+ if(s[i].getpresent())
+ {
+ cout<<"\n"<<s[i].getroll();
+ }
+ }
+ break;
+ }
+ }
+return 0;
+}
