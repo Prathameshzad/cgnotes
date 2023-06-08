@@ -1,0 +1,166 @@
+//For given expression eg. a-b*c-d/e+f construct inorder sequence and traverse it using
+postorder traversal(non recursive).
+
+
+
+#include<iostream>
+#include<stack>
+using namespace std;
+class Btree{
+ typedef struct node{
+  int data;
+  struct node * right ,*left;
+ }node;
+
+public :
+ node * root,*temp;
+ Btree(){
+  root=new node;
+  root=NULL;
+ }
+ void create(){
+  temp=new node;
+
+  cout<<"\nEnter the data : ";
+  cin>>temp->data;
+  temp->left=temp->right=NULL;
+  if(root==NULL){
+   root=temp;
+  }
+  else{
+   insert(root,temp);
+  }
+ }
+
+ void insert(node * root, node * temp){
+  char ch;
+  cout<<"\nDo u want to enter "<<temp->data<<" as left or rright child of "<<root->data<<" : ";
+  cin>>ch;
+  if(ch=='l'){
+   if(root->left==NULL){
+    root->left=temp;
+   }
+   else
+    insert(root->left,temp);
+  }
+  else{
+   if(root->right==NULL)
+    root->right=temp;
+   else
+    insert(root->right,temp);
+  }
+
+ }
+ void postOrder_recursive(node * root){
+  if(root!=NULL){
+   postOrder_recursive(root->left);
+   postOrder_recursive(root->right);
+   cout<<"\t "<<root->data;
+  }
+ }
+ void postOrder_nonRecursive(node* root){
+  if(!root)
+  {
+   cout<<"\nEmpty";
+   return;
+  }
+  stack<node *> s;
+  stack<node*> p;
+  s.push(root);
+  while(!s.empty()){
+   node * cur=s.top();
+   p.push(cur);
+   s.pop();
+   if(cur->left)
+    s.push(cur->left);
+   if(cur->right)
+    s.push(cur->right);
+  }
+  while(!p.empty()){
+   cout<<"\t"<<p.top()->data;
+   p.pop();  }
+ }
+//Extra Part : Inorder
+ void InOrder_nonRecursive(node* root){
+   if(!root)
+   {
+    cout<<"\nEmpty";
+    return;
+   }
+   stack<node *> s;
+   stack<node*> p;
+
+   while(true){
+    while(root!=NULL){
+     //cout<<"\t "<<root->data;
+     s.push(root);
+     root=root->left;
+    }
+    if(s.empty())
+     return;
+    root=s.top();
+    s.pop();
+
+    cout<<"\t "<<root->data;
+    root=root->right;
+     }
+  }
+ //Extra Part : PreOrder
+ void PreOrder_nonRecursive(node* root){
+    if(!root)
+    {
+     cout<<"\nEmpty";
+     return;
+    }
+    stack<node *> s;
+    stack<node*> p;
+
+    while(true){
+     while(root!=NULL){
+      cout<<"\t "<<root->data;
+      s.push(root);
+      root=root->left;
+     }
+     if(s.empty())
+      return;
+     root=s.top();
+     s.pop();
+
+     //cout<<"\t "<<root->data;
+     root=root->right;
+      }
+   }
+ void display(node* root, int space){
+
+  if(root==NULL)
+   return ;
+  space +=3;
+  display(root->right,space);
+  cout<<"\n";
+  for(int i=3; i<=space ; i++){
+   cout<<"  ";}
+   cout<<root->data<<"\n";
+  display(root->left,space);
+ }
+
+};
+int main(){
+Btree b;
+int ch;
+do{
+ b.create();
+ cout<<"\nDo u wnat to insert more elements :1/0 ";
+ cin>>ch;
+
+}while(ch!=0);
+b.display(b.root,0);
+cout<<"\nRecursive Post Order : ";
+b.postOrder_recursive(b.root);
+cout<<"\nNon Recursive Post Order : ";
+b.postOrder_nonRecursive(b.root);
+cout<<"\nNon Recursive In Order : ";
+b.InOrder_nonRecursive(b.root);
+cout<<"\nNon Recursive Pre Order : ";
+b.PreOrder_nonRecursive(b.root);
+ return 0;
+}
