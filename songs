@@ -1,0 +1,1116 @@
+DBMS CHIT-1 QUESTION:
+
+Microsoft Windows [Version 10.0.22621.2428]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Bhakti>mysql -u root -p
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database bhaktiss;
+Query OK, 1 row affected (0.04 sec)
+mysql> use bhaktiss;
+Database changed
+mysql> create table teacher_info(teacher_id INT, teacher_name VARCHAR(50), dept_name VARCHAR(50), sal INT,status CHAR(1));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into teacher_info values(1,'Ravi','IT',30000,'A'),(2,'Aarti','COMP',40000,'A'),(3,'Narendra','COMP',20000,'B'),(4,'Swati','ENTC',15000,'C'),(5,'Sampada','IT',35000,'B'),(6,'Mihir','IT',25000,'B'),(7,'Malati','ENTC',36000,'A');
+Query OK, 7 rows affected (0.02 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from teacher_info;
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          1 | Ravi         | IT        | 30000 | A      |
+|          2 | Aarti        | COMP      | 40000 | A      |
+|          3 | Narendra     | COMP      | 20000 | B      |
+|          4 | Swati        | ENTC      | 15000 | C      |
+|          5 | Sampada      | IT        | 35000 | B      |
+|          6 | Mihir        | IT        | 25000 | B      |
+|          7 | Malati       | ENTC      | 36000 | A      |
++------------+--------------+-----------+-------+--------+
+7 rows in set (0.01 sec)
+
+mysql> select * from teacher_info where sal=35000;
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          5 | Sampada      | IT        | 35000 | B      |
++------------+--------------+-----------+-------+--------+
+1 row in set (0.01 sec)
+
+mysql> select * from teacher_info where status <> 'C';
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          1 | Ravi         | IT        | 30000 | A      |
+|          2 | Aarti        | COMP      | 40000 | A      |
+|          3 | Narendra     | COMP      | 20000 | B      |
+|          5 | Sampada      | IT        | 35000 | B      |
+|          6 | Mihir        | IT        | 25000 | B      |
+|          7 | Malati       | ENTC      | 36000 | A      |
++------------+--------------+-----------+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from teacher_info where status='A' or sal=15000;
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          1 | Ravi         | IT        | 30000 | A      |
+|          2 | Aarti        | COMP      | 40000 | A      |
+|          4 | Swati        | ENTC      | 15000 | C      |
+|          7 | Malati       | ENTC      | 36000 | A      |
++------------+--------------+-----------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from teacher_info where teacher_name like '%i';
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          1 | Ravi         | IT        | 30000 | A      |
+|          2 | Aarti        | COMP      | 40000 | A      |
+|          4 | Swati        | ENTC      | 15000 | C      |
+|          7 | Malati       | ENTC      | 36000 | A      |
++------------+--------------+-----------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create index idx_teacher_name on teacher_info(teacher_name);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update teacher_info set dept_name='COMP' where dept_name='IT';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select dept_name, sum(Sal) as total_Salary from teacher_info group by dept_name;
++-----------+--------------+
+| dept_name | total_Salary |
++-----------+--------------+
+| COMP      |       150000 |
+| ENTC      |        51000 |
++-----------+--------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from teacher_info;
++------------+--------------+-----------+-------+--------+
+| teacher_id | teacher_name | dept_name | sal   | status |
++------------+--------------+-----------+-------+--------+
+|          1 | Ravi         | COMP      | 30000 | A      |
+|          2 | Aarti        | COMP      | 40000 | A      |
+|          3 | Narendra     | COMP      | 20000 | B      |
+|          4 | Swati        | ENTC      | 15000 | C      |
+|          5 | Sampada      | COMP      | 35000 | B      |
+|          6 | Mihir        | COMP      | 25000 | B      |
+|          7 | Malati       | ENTC      | 36000 | A      |
++------------+--------------+-----------+-------+--------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+CHIT-2 QUESTION:
+
+Microsoft Windows [Version 10.0.22621.2428]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Bhakti>mysql -u root -p
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database b77;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use b77;
+Database changed
+mysql>  create table orderTable(order_ID INT, CustomerID INT, orderDate DATE);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into orderTable values(10308, 2,'2018-09-18'),(10309, 3,'2018-09-19'),(10310, 4,'2018-09-20');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from orderTable;
++----------+------------+------------+
+| order_ID | CustomerID | orderDate  |
++----------+------------+------------+
+|    10308 |          2 | 2018-09-18 |
+|    10309 |          3 | 2018-09-19 |
+|    10310 |          4 | 2018-09-20 |
++----------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from orderTable;
++----------+------------+------------+
+| order_ID | CustomerID | orderDate  |
++----------+------------+------------+
+|    10308 |          2 | 2018-09-18 |
+|    10309 |          3 | 2018-09-19 |
+|    10310 |          4 | 2018-09-20 |
++----------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> create table customerS(customerID INT, customerName VARCHAR(50), contactNo VARCHAR(15), state VARCHAR(50));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into customerS values(1,'Vijay',9873456782,'Maharashtra'),(2,'Sanket',1234567890,'Maharashtra'),(3,'Abin',9812345607,'Kerla'),(4,'Ram',1209876543,'Chennai');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from customerS;
++------------+--------------+------------+-------------+
+| customerID | customerName | contactNo  | state       |
++------------+--------------+------------+-------------+
+|          1 | Vijay        | 9873456782 | Maharashtra |
+|          2 | Sanket       | 1234567890 | Maharashtra |
+|          3 | Abin         | 9812345607 | Kerla       |
+|          4 | Ram          | 1209876543 | Chennai     |
++------------+--------------+------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from orderTable INNER JOIN customerS ON orderTable.customerID=customerS.customerID;
++----------+------------+------------+------------+--------------+------------+-------------+
+| order_ID | CustomerID | orderDate  | customerID | customerName | contactNo  | state       |
++----------+------------+------------+------------+--------------+------------+-------------+
+|    10308 |          2 | 2018-09-18 |          2 | Sanket       | 1234567890 | Maharashtra |
+|    10309 |          3 | 2018-09-19 |          3 | Abin         | 9812345607 | Kerla       |
+|    10310 |          4 | 2018-09-20 |          4 | Ram          | 1209876543 | Chennai     |
++----------+------------+------------+------------+--------------+------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql>  select * from orderTable LEFT JOIN customerS ON orderTable.customerID=customerS.customerID;
++----------+------------+------------+------------+--------------+------------+-------------+
+| order_ID | CustomerID | orderDate  | customerID | customerName | contactNo  | state       |
++----------+------------+------------+------------+--------------+------------+-------------+
+|    10308 |          2 | 2018-09-18 |          2 | Sanket       | 1234567890 | Maharashtra |
+|    10309 |          3 | 2018-09-19 |          3 | Abin         | 9812345607 | Kerla       |
+|    10310 |          4 | 2018-09-20 |          4 | Ram          | 1209876543 | Chennai     |
++----------+------------+------------+------------+--------------+------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from orderTable RIGHT JOIN customerS ON orderTable.customerID=customerS.customerID;
++----------+------------+------------+------------+--------------+------------+-------------+
+| order_ID | CustomerID | orderDate  | customerID | customerName | contactNo  | state       |
++----------+------------+------------+------------+--------------+------------+-------------+
+|     NULL |       NULL | NULL       |          1 | Vijay        | 9873456782 | Maharashtra |
+|    10308 |          2 | 2018-09-18 |          2 | Sanket       | 1234567890 | Maharashtra |
+|    10309 |          3 | 2018-09-19 |          3 | Abin         | 9812345607 | Kerla       |
+|    10310 |          4 | 2018-09-20 |          4 | Ram          | 1209876543 | Chennai     |
++----------+------------+------------+------------+--------------+------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select customerS.customerName, orderTable.orderDate from customerS JOIN orderTable ON customerS.customerID=orderTable.customerID WHERE customerS.state='Maharashtra';
++--------------+------------+
+| customerName | orderDate  |
++--------------+------------+
+| Sanket       | 2018-09-18 |
++--------------+------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER table customerS ADD COLUMN contactNo VARCHAR(15);
+ERROR 1060 (42S21): Duplicate column name 'contactNo'
+mysql> UPDATE customerS SET contactNo='9977886655' WHERE customerID=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  UPDATE customerS SET contactNo='1234567897' WHERE customerID=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  UPDATE customerS SET contactNo='0987654321' WHERE customerID=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  UPDATE customerS SET contactNo='1122334455' WHERE customerID=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customerS;
++------------+--------------+------------+-------------+
+| customerID | customerName | contactNo  | state       |
++------------+--------------+------------+-------------+
+|          1 | Vijay        | 9977886655 | Maharashtra |
+|          2 | Sanket       | 1234567897 | Maharashtra |
+|          3 | Abin         | 0987654321 | Kerla       |
+|          4 | Ram          | 1122334455 | Chennai     |
++------------+--------------+------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select distinct state from customerS WHERE state LIKE 'M%';
++-------------+
+| state       |
++-------------+
+| Maharashtra |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select orderTable.order_ID,customerS.customerName from orderTable JOIN customerS ON orderTable.customerID=customerS.customerID WHERE customerS.state='Maharashtra';
++----------+--------------+
+| order_ID | customerName |
++----------+--------------+
+|    10308 | Sanket       |
++----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customerS ORDER BY state DESC;
++------------+--------------+------------+-------------+
+| customerID | customerName | contactNo  | state       |
++------------+--------------+------------+-------------+
+|          1 | Vijay        | 9977886655 | Maharashtra |
+|          2 | Sanket       | 1234567897 | Maharashtra |
+|          3 | Abin         | 0987654321 | Kerla       |
+|          4 | Ram          | 1122334455 | Chennai     |
++------------+--------------+------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customerS WHERE contactNo like '%45%';
++------------+--------------+------------+-------------+
+| customerID | customerName | contactNo  | state       |
++------------+--------------+------------+-------------+
+|          2 | Sanket       | 1234567897 | Maharashtra |
+|          4 | Ram          | 1122334455 | Chennai     |
++------------+--------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHIT NO 3
+PL/SQL borrower 
+Schema: 1. Borrower (Roll no., Name, Date of Issue, Name of Book, Status) 2. Fine (Roll no, Date, Amt.) 
+• Accept roll no. & name of book from user. 
+• Check the number of days (from date of issue), if days are between 15 to 30 then fine amount will be Rs 5per day. 
+• If no. of days>30, per day fine will be Rs 50 per day & for days less than 30, Rs. 5 per day. 
+• After submitting the book, status will change from I to R. 
+• If condition of fine is true, then details will be stored into fine table.--------*/
+
+create table borrower(rollno int primary key,name varchar(20),dateofissue date,nameofbook
+varchar(20),status varchar(20));
+create table fine(rollno int,foreign key(rollno) references borrower(rollno),returndate date,
+amount int);
+insert into borrower values(1,'abc','2021-06-01','SEPM','I');
+insert into borrower values(2,'xyz','2021-05-01','OOP','I');
+insert into borrower values(3,'pqr','2021-06-15','DBMS','I');
+insert into borrower values(4,'def','2021-06-30','DSA','I');
+insert into borrower values(5,'lmn','2021-07-05','ADS','I');
+select * from borrower;
+delimiter $
+create procedure calc_fine_lib(in roll int)
+begin
+declare fine1 int;
+declare noofdays int;
+declare issuedate date;
+declare exit handler for SQLEXCEPTION select 'create table definition';
+select dateofissue into issuedate from borrower where rollno=roll;
+select datediff(curdate(),issuedate) into noofdays;
+if noofdays>15 and noofdays<=30 then
+set fine1=noofdays*5;
+insert into fine values(roll,curdate(),fine1);
+elseif noofdays>30 then
+set fine1=((noofdays-30)*50) + 30*5;
+insert into fine values(roll,curdate(),fine1);
+else
+
+insert into fine values(roll,curdate(),0);
+end if;
+update borrower set status='R' where rollno=roll;
+end $
+delimiter ;
+call calc_fine_lib(1);
+call calc_fine_lib(2);
+call calc_fine_lib(3);
+call calc_fine_lib(4);
+call calc_fine_lib(5);
+select * from fine;
+
+
+
+
+
+
+
+
+
+
+CHIT NO 4
+Stored Procedure
+Write a Stored Procedure namely proc_Grade for the categorization of student. If marks scoredby students in examination is <=1500 and marks>=990 then student will be placed in distinction category if marks scored are between 989 and900 category is first class, if marks 899 and 825 category is Higher Second Class Write a PL/SQL block for using procedure created with above requirement.
+
+Stud_Marks(name, total_marks)
+mysql> create database marks;
+Query OK, 1 row affected (0.12 sec)
+mysql> use marks;
+Database changed
+mysql> create table studmarks(name varchar(20),total_marks integer);
+Query OK, 0 rows affected (0.30 sec)
+mysql> create table result(roll_no integer,name varchar(20),class varchar(25));
+Query OK, 0 rows affected (0.28 sec)
+mysql> DELIMITER $
+mysql> create procedure proc_grade(in rollno tinyint,in name varchar(15),in marks int)
+-> begin
+-> declare class varchar(25);
+-> if marks>=990 and marks<=1500 then set class="Distinction";
+-> elseif marks<=989 and marks>=900 then set class="First Class";
+-> elseif marks<=899 and marks>=825 then set class="Second Class";
+-> elseif marks<=824 and marks>=700 then set class="Pass";
+-> else
+-> set class="Fail";
+-> end if;
+-> insert into studmarks values(name,marks);
+-> insert into result values(rollno,name,class);
+-> end$
+Query OK, 0 rows affected (0.08 sec)
+mysql> DELIMITER ;
+mysql> call proc_grade(1,"Aryan",850);
+-> DELIMITER ;
+Query OK, 1 row affected (0.34 sec)
+mysql> call proc_grade(2,"Peter",1000);
+-> DELIMITER ;
+Query OK, 1 row affected (0.25 sec)
+mysql> call proc_grade(3,"Smith",834);
+-> DELIMITER ;
+Query OK, 1 row affected (0.09 sec)
+mysql> call proc_grade(4,"Carol",750);
+-> DELIMITER ;
+Query OK, 1 row affected (0.10 sec)
+mysql> call proc_grade(5,"Bob",950);
+-> DELIMITER ;
+Query OK, 1 row affected (0.07 sec)
+mysql> select * from result;
+-> DELIMITER $
++---------+-------+--------------+
+| roll_no | name | class |
++---------+-------+--------------+
+| 1 | Aryan | Second Class |
+| 2 | Peter | Distinction |
+| 3 | Smith | Second Class |
+| 4 | Carol | Pass |
+| 5 | Bob | First Class |
++---------+-------+--------------+
+5 rows in set (0.04 sec)
+mysql> select * from studmarks;
+-> DELIMITER $
++-------+-------------+
+| name | total_marks |
++-------+-------------+
+| Aryan | 850 |
+| Peter | 1000 |
+| Smith | 834 |
+| Carol | 750 |
+| Bob | 950 |
++-------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHIT NO 5
+Cursor
+Write a PL/SQL block of code using parameterized Cursor that will merge the data availablein the newly created table N_RollCall with the data available in the table O_RollCall. If the data in the first table already exist in the second table then that data should be skipped.
+mysql> use sys;
+Database changed
+mysql> create table old_roll(roll int,name varchar(10));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc old_roll;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> create table new_roll(roll int,name varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc new_roll;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+    1 rows in set (0.01 sec)
+
+insert into old_roll values(4,'d');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into old_roll values(3,'bc');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into old_roll values(1,'bcd');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into old_roll values(2,'b');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into old_roll values(5,'bch');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into new_roll values(5,'bch');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into new_roll values(1,'bc');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into new_roll values(2,'bc');
+Query OK, 1 row affected (0.02 sec)
+mysql> select*from old_roll;
++------+------+
+| roll | name |
++------+------+
+|    4 | d    |
+|    3 | bc   |
+|    1 | bcd  |
+|    2 | b    |
+|    5 | bch  |
++------+------+
+5 rows in set (0.00 sec)
+
+mysql> select*from new_roll;
++------+------+
+| roll | name |
++------+------+
+|    5 | bch  |
+|    1 | bc   |
+|    2 | bc   |
++------+------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter $
+mysql> create procedure roll_list()
+    -> begin
+    -> declare oldrollnumber int;
+    -> declare oldname varchar(10);
+    -> declare newrollnumber int;
+    -> declare newname varchar(10);
+    -> declare done int default false;
+    -> declare c1 cursor for select roll,name from old_roll;
+    -> declare c2 cursor for select roll,name from new_roll;
+    ->
+    -> declare continue handler for not found set done=true;
+    -> open c1;
+    -> loop1:loop
+    -> fetch c1 into oldrollnumber,oldname;
+    -> if done then
+    -> leave loop1;
+    -> end if;
+    -> open c2;
+    -> loop2:loop
+    -> fetch c2 into newrollnumber,newname;
+    -> if done then
+    -> insert into new_roll values(oldrollnumber,oldname);
+    -> set done=false;
+    -> close c2;
+    -> leave loop2;
+    -> end if;
+    -> if oldrollnumber=newrollnumber then
+    -> leave loop2;
+    -> end if;
+    -> end loop;
+    -> end loop;
+    -> close c1;
+    -> end $
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> delimiter ;
+mysql> desc old_roll;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> select*from old_roll;
++------+------+
+| roll | name |
++------+------+
+|    4 | d    |
+|    3 | bc   |
+|    1 | bcd  |
+|    2 | b    |
+|    5 | bch  |
++------+------+
+5 rows in set (0.00 sec)
+
+mysql> select*from new_roll;
++------+------+
+| roll | name |
++------+------+
+|    5 | bch  |
+|    1 | bc   |
+|    2 | bc   |
++------+------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+CHIT NO 6
+Trigger
+Write a database trigger on Library table. The System should keep track of the records that are being updated or deleted. The old value of updated or deleted records should be added in Library_Audit table.
+mysql> use sys
+Database changed
+mysql> CREATE TABLE Library1(B_id numeric(5),B_name varchar(10),Status varchar(1));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE TABLE Library2(B_id numeric(5),B_name varchar(10),Status varchar(1));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Library1 values(1,'SPOS','I');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Library1 values(2,'CN','R'),(3,'TOC','R'),(4,'SPM','R'),(5,'DBMS','I');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from Library1;
++------+--------+--------+
+| B_id | B_name | Status |
++------+--------+--------+
+|    1 | SPOS   | I      |
+|    2 | CN     | R      |
+|    3 | TOC    | R      |
+|    4 | SPM    | R      |
+|    5 | DBMS   | I      |
++------+--------+--------+
+5 rows in set (0.00 sec)
+DELIMITER //
+mysql>
+mysql> CREATE TRIGGER LIB BEFORE DELETE ON Library1
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO Library2 (B_id, B_name, Status) VALUES (OLD.B_id, OLD.B_name, OLD.Status);
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> select*from Library2;
+Empty set (0.01 sec)
+
+mysql> DELETE FROM Library1 WHERE B_id=5;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select*from Library1;
++------+--------+--------+
+| B_id | B_name | Status |
++------+--------+--------+
+|    1 | SPOS   | I      |
+|    2 | CN     | R      |
+|    3 | TOC    | R      |
+|    4 | SPM    | R      |
++------+--------+--------+
+4 rows in set (0.00 sec)
+DELIMITER //
+mysql>
+mysql> CREATE TRIGGER L_Update AFTER UPDATE ON Library1
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     UPDATE Library2 SET Status = 'R' WHERE B_id = OLD.B_id;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> DELIMITER ;
+UPDATE library1 SET Status='R' Where B_id=5;
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM Library1;
++------+--------+--------+
+| B_id | B_name | Status |
++------+--------+--------+
+|    1 | SPOS   | I      |
+|    2 | CN     | R      |
+|    3 | TOC    | R      |
+|    4 | SPM    | R      |
++------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Library2;
++------+--------+--------+
+| B_id | B_name | Status |
++------+--------+--------+
+|    5 | DBMS   | I      |
++------+--------+--------+
+    1 row in set (0.00 sec)
+Chit No. 7
+Design and develop SQL DML statements for below problem statement. Create Table: 
+
+
+    1. Find different locations from where employees belong to?
+    2. What is maximum and minimum salary?
+    3. Display the content of employee table according to the ascending order of salary amount.
+    4. Find the name of employee who lived in Nasik or Pune city.
+    5. Find the name of employees who does not get commission.
+    6. Change the city of Amit to Nashik.
+    7. Find the information of employees whose name starts with ‘A’.
+    8. Find the count of staff from Mumbai.
+    9. Find the address from where employees are belonging as well as where projects are going on.
+Find city wise maximum salary having maximum salary greater than 26000
+
+
+mysql> create table emp(Eid int, Ename varchar(20),Address varchar(30),Salarry varchar(20), Commision int);
+mysql> insert into emp values(1,"Amit","Pune","35000",5000);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into emp values(2,"Sneha","Pune","25000",null),(3,"Savita","Nasik","28000",2000),(4,"Pooja","Mumbai","19000",null),(5,"Sagar","Mumbai","25
+000",3000);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp
+    -> ^C
+mysql> select * from emp;
++------+--------+---------+---------+-----------+
+| Eid  | Ename  | Address | Salarry | Commision |
++------+--------+---------+---------+-----------+
+|    1 | Amit   | Pune    | 35000   |      5000 |
+|    2 | Sneha  | Pune    | 25000   |      NULL |
+|    3 | Savita | Nasik   | 28000   |      2000 |
+|    4 | Pooja  | Mumbai  | 19000   |      NULL |
+|    5 | Sagar  | Mumbai  | 25000   |      3000 |
++------+--------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> create table addr(Prno int,Address varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into addr values(10,"Mumbai"),(20,"Pune"),(30,"Jalgaon");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Find different locations from where employees belong to?
+mysql> select distinct address from emp;
++---------+
+| address |
++---------+
+| Pune    |
+| Nasik   |
+| Mumbai  |
++---------+
+3 rows in set (0.01 sec)
+
+What is maximum and minimum salary?
+mysql> select max(Salarry),min(Salarry) from emp;
++--------------+--------------+
+| max(Salarry) | min(Salarry) |
++--------------+--------------+
+| 35000        | 19000        |
++--------------+--------------+
+1 row in set (0.01 sec)
+
+Display the content of employee table according to the ascending order of salary amount.
+mysql> select * from emp order by Salarry asc;
++------+--------+---------+---------+-----------+
+| Eid  | Ename  | Address | Salarry | Commision |
++------+--------+---------+---------+-----------+
+|    4 | Pooja  | Mumbai  | 19000   |      NULL |
+|    2 | Sneha  | Pune    | 25000   |      NULL |
+|    5 | Sagar  | Mumbai  | 25000   |      3000 |
+|    3 | Savita | Nasik   | 28000   |      2000 |
+|    1 | Amit   | Pune    | 35000   |      5000 |
++------+--------+---------+---------+-----------+
+5 rows in set (0.01 sec)
+Find the name of employee who lived in Nasik or Pune city.
+mysql> select * from emp where Address="Pune" or Address="Nasik";
++------+--------+---------+---------+-----------+
+| Eid  | Ename  | Address | Salarry | Commision |
++------+--------+---------+---------+-----------+
+|    1 | Amit   | Pune    | 35000   |      5000 |
+|    2 | Sneha  | Pune    | 25000   |      NULL |
+|    3 | Savita | Nasik   | 28000   |      2000 |
++------+--------+---------+---------+-----------+
+3 rows in set (0.01 sec)
+Find the name of employees who does not get commission.
+mysql> select * from emp where Commision is null;
++------+-------+---------+---------+-----------+
+| Eid  | Ename | Address | Salarry | Commision |
++------+-------+---------+---------+-----------+
+|    2 | Sneha | Pune    | 25000   |      NULL |
+|    4 | Pooja | Mumbai  | 19000   |      NULL |
++------+-------+---------+---------+-----------+
+2 rows in set (0.00 sec)
+Change the city of Amit to Nashik.
+mysql> update emp set Address="Nasik" where Ename="Amit";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from emp;
++------+--------+---------+---------+-----------+
+| Eid  | Ename  | Address | Salarry | Commision |
++------+--------+---------+---------+-----------+
+|    1 | Amit   | Nasik   | 35000   |      5000 |
+|    2 | Sneha  | Pune    | 25000   |      NULL |
+|    3 | Savita | Nasik   | 28000   |      2000 |
+|    4 | Pooja  | Mumbai  | 19000   |      NULL |
+|    5 | Sagar  | Mumbai  | 25000   |      3000 |
++------+--------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+Find the information of employees whose name starts with ‘A’.
+mysql> select * from emp where Ename like 'A%';
++------+-------+---------+---------+-----------+
+| Eid  | Ename | Address | Salarry | Commision |
++------+-------+---------+---------+-----------+
+|    1 | Amit  | Nasik   | 35000   |      5000 |
++------+-------+---------+---------+-----------+
+1 row in set (0.00 sec)
+Find the count of staff from Mumbai.
+mysql> select count(Eid) from emp where Address="Mumbai";
++------------+
+| count(Eid) |
++------------+
+|          2 |
++------------+
+1 row in set (0.00 sec)
+Find the address from where employees are belonging as well as where projects are going on.
+mysql> select distinct Address from emp union select distinct Address from addr;
++---------+
+| Address |
++---------+
+| Nasik   |
+| Pune    |
+| Mumbai  |
+| Jalgaon |
++---------+
+4 rows in set (0.01 sec)
+Find city wise maximum salary having maximum salary greater than 26000
+mysql> select Address, max(Salarry) as maxsalary from emp group by Address having max(Salarry)>26000;
++---------+-----------+
+| Address | maxsalary |
++---------+-----------+
+| Nasik   | 35000     |
++---------+-----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+MONGODB 
+    A. Collection “orderinfo“ which contains the documents given as below(Perform on Mongo Terminal) { cust_id:123 cust_name:”abc”, status:”A”, price:250 } 
+i. find the average price for each customers having status 'A' 
+ii. Display the status of the customers whose amount/price lie between 100 and 1000
+iii. Display the customers information without “_id” . 
+iv. create a simple index on onderinfo collection and fire the queries.
+
+Find the average price for each customers having status 'A'
+db.orderinfo.aggregate([
+  { $match: { status: 'A' } },
+  { $group: { _id: '$cust_id', averagePrice: { $avg: '$price' } } }
+])
+    • {
+  _id: 166,
+  averagePrice: 250
+}
+
+Display the status of the customers whose amount/price lie between 100 and 1000
+db.orderinfo.find({ price: { $gte: 100, $lte: 1000 } }, { status: 1, _id: 0 })
+    • {
+  status: 'A'
+}
+
+Display the customers information without “_id”
+db.orderinfo.find({}, { _id: 0 })
+    • 
+{
+  cust_id: 123,
+  ststus: 'A',
+  cust_name: 'Atharva',
+  price: 500
+}
+{
+  cust_id: 124,
+  ststus: 'B',
+  cust_name: 'Aryan',
+  price: 460
+}
+{
+  cust_id: 125,
+  ststus: 'C',
+  cust_name: 'Atul',
+  price: 250
+}
+Create a simple index on onderinfo collection and fire the queries.
+db.orderinfo.createIndex({ cust_id: 1 })  // You can choose a different field for indexing
+    • cust_id_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B. Collection “movies“ which contains the documents given as below(Perform on Mongo Terminal) { name: “Movie1”, type: “action”, budget:1000000 producer:{ name: “producer1”, address:”PUNE” } } 
+i. Find the name of the movie having budget greater than 1,00,000. 
+ii. Find the name of producer who lives in Pune 
+iii. Update the type of movie “action” to “horror” 
+iv. Find all the documents produced by name “producer1” with their address.
+
+OUTPUT :
+// Task i: Find the name of the movie having a budget greater than 1,00,000.
+db.movies.find({ budget: { $gt: 100000 } }, { name: 1, _id: 0 })
+    • {
+  name: 'Movie1'
+}
+{
+  name: 'Movie2'
+}
+
+// Task ii: Find the name of the producer who lives in Pune.
+db.movies.find({ "producer.address": "PUNE" }, { "producer.name": 1, _id: 0 })
+    • {
+  producer: {
+    name: 'producer1'
+  }
+}
+
+// Task iii: Update the type of the movie "action" to "horror".
+db.movies.update({ type: "action" }, { $set: { type: "horror" } }, { multi: true })
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+    • {
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+// Task iv: Find all documents produced by name "producer1" with their address.
+db.movies.find({ "producer.name": "producer1" }, { name: 1, "producer.address": 1, _id: 0 })
+    • {
+  name: 'Movie1',
+  producer: {
+    address: 'PUNE'
+  }
+}
+C. Perform aggregation and Indexing using mongodb on below database 
+1. Create a database department
+2. Create a collection as teacher with fields as name , department ,experience and salary 
+3. Display the department wise average salary.
+ 4. Display the no. Of employees working in each department. 
+5. Display the department wise minimum salary. 6. Apply index and drop index
+
+use department
+switched to db department
+db.createCollection("teacher")
+{ ok: 1 }
+db.teacher.insertMany([
+  { name: "Teacher1", department: "Math", experience: 5, salary: 60000 },
+  { name: "Teacher2", department: "Physics", experience: 8, salary: 75000 },
+  { name: "Teacher3", department: "Chemistry", experience: 3, salary: 50000 },
+  { name: "Teacher4", department: "Math", experience: 10, salary: 80000 },
+  { name: "Teacher5", department: "Physics", experience: 6, salary: 70000 },
+  { name: "Teacher6", department: "Chemistry", experience: 4, salary: 55000 }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("655246df2216a57ecf2185eb"),
+    '1': ObjectId("655246df2216a57ecf2185ec"),
+    '2': ObjectId("655246df2216a57ecf2185ed"),
+    '3': ObjectId("655246df2216a57ecf2185ee"),
+    '4': ObjectId("655246df2216a57ecf2185ef"),
+    '5': ObjectId("655246df2216a57ecf2185f0")
+  }
+}
+//  Display department-wise average salary
+db.teacher.aggregate([
+  { $group: { _id: "$department", avgSalary: { $avg: "$salary" } } }
+])
+{
+  _id: 'Chemistry',
+  avgSalary: 52500
+}
+{
+  _id: 'Physics',
+  avgSalary: 72500
+}
+{
+  _id: 'Math',
+  avgSalary: 70000
+}
+//  Display the number of employees working in each department
+db.teacher.aggregate([
+  { $group: { _id: "$department", count: { $sum: 1 } } }
+])
+{
+  _id: 'Chemistry',
+  count: 2
+}
+{
+  _id: 'Physics',
+  count: 2
+}
+{
+  _id: 'Math',
+  count: 2
+}
+// Display department-wise minimum salary
+db.teacher.aggregate([
+  { $group: { _id: "$department", minSalary: { $min: "$salary" } } }
+])
+{
+  _id: 'Chemistry',
+  minSalary: 50000
+}
+{
+  _id: 'Physics',
+  minSalary: 70000
+}
+{
+  _id: 'Math',
+  minSalary: 60000
+}
+//  Apply an index on the 'department' field
+db.teacher.createIndex({ department: 1 })
+department_1
+//  Drop the index on the 'department' field
+db.teacher.dropIndex("department_1")
+{ nIndexesWas: 2, ok: 1 }
+department
+Selection deleted
+
+
+
+
+
+
+
+D. Collection “city “ which contains the documents given as below(Perform on Mongo Terminal) { city:”pune”, type:”urban”, state:”MH”, population:”5600000” } 
+-using mapreduce, find statewise population 
+-using mapreduce, find citywise population 
+-using mapreduce, find typewise population.
+OUTPUT:
+// Switch to the appropriate database (replace 'your_database' with the actual database name)
+use your_database
+
+// Create the "city" collection and insert multiple data points
+db.city.insertMany([
+  { city: "Pune", type: "urban", state: "MH", population: 5600000 },
+  { city: "Mumbai", type: "urban", state: "MH", population: 12442373 },
+  { city: "Bangalore", type: "urban", state: "KA", population: 1234567 },
+  { city: "Chennai", type: "urban", state: "TN", population: 6789012 },
+  // Add more documents as needed
+]);
+// Map function for statewise population
+var mapStatewisePopulation = function() {
+  emit(this.state, parseInt(this.population));
+};
+
+// Reduce function for statewise population
+var reduceStatewisePopulation = function(key, values) {
+  return Array.sum(values);
+};
+
+// Execute the MapReduce operation
+db.city.mapReduce(
+  mapStatewisePopulation,
+  reduceStatewisePopulation,
+  { out: { inline: 1 }, query: {} }
+);
+// Map function for citywise population
+var mapCitywisePopulation = function() {
+  emit(this.city, parseInt(this.population));
+};
+
+// Reduce function for citywise population
+var reduceCitywisePopulation = function(key, values) {
+  return Array.sum(values);
+};
+
+// Execute the MapReduce operation
+db.city.mapReduce(
+  mapCitywisePopulation,
+  reduceCitywisePopulation,
+  { out: { inline: 1 }, query: {} }
+);
+// Map function for typewise population
+var mapTypewisePopulation = function() {
+  emit(this.type, parseInt(this.population));
+};
+
+// Reduce function for typewise population
+var reduceTypewisePopulation = function(key, values) {
+  return Array.sum(values);
+};
+
+// Execute the MapReduce operation
+db.city.mapReduce(
+  mapTypewisePopulation,
+  reduceTypewisePopulation,
+  { out: { inline: 1 }, query: {} }
+);
+
